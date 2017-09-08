@@ -1,0 +1,17 @@
+Package: exemplr
+Type: Package
+Title: Constructs tidy-data versions of some standard R example-datasets
+Version: 0.1.0
+Author: Russ Hyde
+Maintainer: Russ Hyde <russell.hyde@glasgow.ac.uk>
+Description: The R datasets package provides a lot of interesting examples for
+  use in workshops / tutorials. Very few of the datasets are in a tidy-data
+  format and so need a bit of hacking before they can effectively be used with
+  `ggplot2` and related parts of the `tidyverse`. This package provides some
+  wrapper functions that hack these datasets into exemplar tidy-data format. 
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 5.0.1
+Imports: tibble,
+    datasets
