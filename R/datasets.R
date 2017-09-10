@@ -1,7 +1,27 @@
 #' @import       datasets
+#' @import       dplyr
+#' @importFrom   magrittr      %>%
 #' @importFrom   tibble        tibble
+#' @importFrom   lubridate     ymd
 #'
 NULL
+
+# Convert all dates into lubridate
+# Move all row.names into an appropriately named column
+
+#' Creates a tidy-data version of the airquality dataset
+#'
+#' Dates are converted from Month / Day to lubridate
+#'
+#' @export
+get_tidy_airquality <- function(){
+  air <- datasets::airquality
+  Date <- lubridate::ymd(paste("1973", air$Month, air$Day, sep = "-"))
+
+  air[, !(colnames(air) %in% c("Month", "Day"))] %>%
+    dplyr::mutate(Date = Date) %>%
+    dplyr::as_data_frame()
+}
 
 #' Creates a tidy-data version of the Anscombe quartet dataset
 #'
@@ -29,7 +49,7 @@ get_tidy_anscombe <- function(){
 #' @export
 #'
 get_tidy <- function(dataset){
-  available <- c("anscombe")
+  available <- c("anscombe", "airquality")
   stopifnot(dataset %in% available)
-  get_tidy_anscombe()
+  get(paste0("get_tidy_", dataset))()
 }
